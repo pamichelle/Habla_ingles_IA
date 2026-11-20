@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: prompt: contiene las reglas pedagógicas y la defensa contra inyección
+ok 1 - prompt: contiene las reglas pedagógicas y la defensa contra inyección
+  ---
+  duration_ms: 1.281301
+  type: 'test'
+  ...
+# Subtest: prompt: nivel o modo inválido lanza
+ok 2 - prompt: nivel o modo inválido lanza
+  ---
+  duration_ms: 0.195306
+  type: 'test'
+  ...
+# Subtest: solicitud válida pasa
+ok 3 - solicitud válida pasa
+  ---
+  duration_ms: 0.161493
+  type: 'test'
+  ...
+# Subtest: solicitud: rechaza nivel, mensajes vacíos, texto largo y roles mal alternados
+ok 4 - solicitud: rechaza nivel, mensajes vacíos, texto largo y roles mal alternados
+  ---
+  duration_ms: 0.148257
+  type: 'test'
+  ...
+# Subtest: respuesta: extrae JSON aunque venga con cercas de markdown
+ok 5 - respuesta: extrae JSON aunque venga con cercas de markdown
+  ---
+  duration_ms: 0.157369
+  type: 'test'
+  ...
+# Subtest: respuesta: descarta correcciones incompletas y recorta a 5
+ok 6 - respuesta: descarta correcciones incompletas y recorta a 5
+  ---
+  duration_ms: 0.114402
+  type: 'test'
+  ...
+# Subtest: respuesta: texto sin JSON o sin "respuesta" lanza
+ok 7 - respuesta: texto sin JSON o sin "respuesta" lanza
+  ---
+  duration_ms: 0.077929
+  type: 'test'
+  ...
+# Subtest: servidor: envía llave y prompt al modelo y devuelve JSON validado
+ok 8 - servidor: envía llave y prompt al modelo y devuelve JSON validado
+  ---
+  duration_ms: 32.221336
+  type: 'test'
+  ...
+# Subtest: servidor: 400 con solicitud inválida y 404 en otra ruta
+ok 9 - servidor: 400 con solicitud inválida y 404 en otra ruta
+  ---
+  duration_ms: 9.587319
+  type: 'test'
+  ...
+# Subtest: servidor: si el modelo falla o devuelve basura, 502 sin filtrar detalles
+ok 10 - servidor: si el modelo falla o devuelve basura, 502 sin filtrar detalles
+  ---
+  duration_ms: 4.633257
+  type: 'test'
+  ...
+# Subtest: servidor: limita solicitudes por minuto (429)
+ok 11 - servidor: limita solicitudes por minuto (429)
+  ---
+  duration_ms: 5.834919
+  type: 'test'
+  ...
+# Subtest: servidor: exige token de app si está configurado
+ok 12 - servidor: exige token de app si está configurado
+  ---
+  duration_ms: 9.251088
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 130.580348

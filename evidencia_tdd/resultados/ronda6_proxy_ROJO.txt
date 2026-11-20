@@ -1,0 +1,225 @@
+# RONDA 6 - FASE ROJO (proxy/prompt.js y proxy/server.js reemplazados por
+# versiones "evidencia_tdd/rojo/proxy/*.js" que NO están implementadas todavía).
+# Resultado real de `node --test`: 9 de 12 pruebas en ROJO (not ok).
+# Las 3 que aparecen "ok" pasan por coincidencia con un stub tan simple
+# (p. ej. construirPrompt() siempre lanza error, y esa prueba solo
+# esperaba que lanzara error) - es normal y esperado en una fase ROJO real.
+# NOTA: la corrida se interrumpió manualmente tras capturar los resultados
+# porque el stub de servidor no cierra el socket cuando una prueba falla
+# antes de llamar a s.close(), lo que deja el proceso colgado (evidencia de
+# por qué SÍ importa limpiar recursos incluso en código que se va a reescribir).
+TAP version 13
+# Subtest: prompt: contiene las reglas pedagógicas y la defensa contra inyección
+not ok 1 - prompt: contiene las reglas pedagógicas y la defensa contra inyección
+  ---
+  duration_ms: 0.615668
+  type: 'test'
+  location: '/home/claude/habla_fluido/proxy/test/proxy.test.js:10:1'
+  failureType: 'testCodeFailure'
+  error: 'TODO: construirPrompt no implementado (Ronda 6)'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    construirPrompt (/home/claude/habla_fluido/proxy/prompt.js:10:9)
+    TestContext.<anonymous> (/home/claude/habla_fluido/proxy/test/proxy.test.js:11:13)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: prompt: nivel o modo inválido lanza
+ok 2 - prompt: nivel o modo inválido lanza
+  ---
+  duration_ms: 0.997841
+  type: 'test'
+  ...
+# Subtest: solicitud válida pasa
+ok 3 - solicitud válida pasa
+  ---
+  duration_ms: 0.136524
+  type: 'test'
+  ...
+# Subtest: solicitud: rechaza nivel, mensajes vacíos, texto largo y roles mal alternados
+not ok 4 - solicitud: rechaza nivel, mensajes vacíos, texto largo y roles mal alternados
+  ---
+  duration_ms: 4.773593
+  type: 'test'
+  location: '/home/claude/habla_fluido/proxy/test/proxy.test.js:22:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(validarSolicitud({ ...ok, nivel: 'x' }))
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: ~
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/home/claude/habla_fluido/proxy/test/proxy.test.js:23:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: respuesta: extrae JSON aunque venga con cercas de markdown
+not ok 5 - respuesta: extrae JSON aunque venga con cercas de markdown
+  ---
+  duration_ms: 0.117036
+  type: 'test'
+  location: '/home/claude/habla_fluido/proxy/test/proxy.test.js:30:1'
+  failureType: 'testCodeFailure'
+  error: 'TODO: extraerRespuesta no implementado (Ronda 6)'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    extraerRespuesta (/home/claude/habla_fluido/proxy/prompt.js:18:9)
+    TestContext.<anonymous> (/home/claude/habla_fluido/proxy/test/proxy.test.js:31:13)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: respuesta: descarta correcciones incompletas y recorta a 5
+not ok 6 - respuesta: descarta correcciones incompletas y recorta a 5
+  ---
+  duration_ms: 0.095707
+  type: 'test'
+  location: '/home/claude/habla_fluido/proxy/test/proxy.test.js:36:1'
+  failureType: 'testCodeFailure'
+  error: 'TODO: extraerRespuesta no implementado (Ronda 6)'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    extraerRespuesta (/home/claude/habla_fluido/proxy/prompt.js:18:9)
+    TestContext.<anonymous> (/home/claude/habla_fluido/proxy/test/proxy.test.js:39:13)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: respuesta: texto sin JSON o sin "respuesta" lanza
+ok 7 - respuesta: texto sin JSON o sin "respuesta" lanza
+  ---
+  duration_ms: 0.164829
+  type: 'test'
+  ...
+# Subtest: servidor: envía llave y prompt al modelo y devuelve JSON validado
+not ok 8 - servidor: envía llave y prompt al modelo y devuelve JSON validado
+  ---
+  duration_ms: 47.572267
+  type: 'test'
+  location: '/home/claude/habla_fluido/proxy/test/proxy.test.js:58:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    404 !== 200
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 200
+  actual: 404
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/claude/habla_fluido/proxy/test/proxy.test.js:66:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: servidor: 400 con solicitud inválida y 404 en otra ruta
+not ok 9 - servidor: 400 con solicitud inválida y 404 en otra ruta
+  ---
+  duration_ms: 3.87088
+  type: 'test'
+  location: '/home/claude/habla_fluido/proxy/test/proxy.test.js:74:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    404 !== 400
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 400
+  actual: 404
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/claude/habla_fluido/proxy/test/proxy.test.js:76:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: servidor: si el modelo falla o devuelve basura, 502 sin filtrar detalles
+not ok 10 - servidor: si el modelo falla o devuelve basura, 502 sin filtrar detalles
+  ---
+  duration_ms: 2.770642
+  type: 'test'
+  location: '/home/claude/habla_fluido/proxy/test/proxy.test.js:80:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    404 !== 502
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 502
+  actual: 404
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/claude/habla_fluido/proxy/test/proxy.test.js:84:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: servidor: limita solicitudes por minuto (429)
+not ok 11 - servidor: limita solicitudes por minuto (429)
+  ---
+  duration_ms: 2.570363
+  type: 'test'
+  location: '/home/claude/habla_fluido/proxy/test/proxy.test.js:93:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    404 !== 200
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 200
+  actual: 404
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/claude/habla_fluido/proxy/test/proxy.test.js:96:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: servidor: exige token de app si está configurado
+not ok 12 - servidor: exige token de app si está configurado
+  ---
+  duration_ms: 3.944295
+  type: 'test'
+  location: '/home/claude/habla_fluido/proxy/test/proxy.test.js:101:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    404 !== 401
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 401
+  actual: 404
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/claude/habla_fluido/proxy/test/proxy.test.js:104:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
